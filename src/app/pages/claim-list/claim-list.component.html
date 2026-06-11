@@ -1,0 +1,50 @@
+<div>
+  <div>
+    <mat-toolbar *appIsInRole="'user'" color="primary">
+      <span>
+        <button (click)="add()" *appIsInRole="'user'" color="primary" mat-button style="color: white">
+          <mat-icon>add</mat-icon>
+          {{'claim.button_new' | translate}}
+        </button>
+      </span>
+    </mat-toolbar>
+  </div>
+  <table [dataSource]="claimDataSource" class="mat-elevation-z8 list-table" mat-table>
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef class="w-75 th-center" mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell style="text-align: end">
+        <button (click)="edit(element)" *appIsInRole="'admin'" color="primary" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="delete(element)" *appIsInRole="'admin'" color="warn" mat-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="message">
+      <th *matHeaderCellDef mat-header-cell>{{'claim.message' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.message}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th *matHeaderCellDef mat-header-cell>{{'claim.status' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{('claim.status_' + element.status) | translate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th *matHeaderCellDef mat-header-cell>{{'claim.createdAt' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.createdAt | date:'dd.MM.yyyy'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="report">
+      <th *matHeaderCellDef mat-header-cell>{{'claim.report' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.report?.location}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th *matHeaderCellDef mat-header-cell>{{'claim.user' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.user?.username}} </td>
+    </ng-container>
+    <tr *matHeaderRowDef="columns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10]" [pageSize]="10"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

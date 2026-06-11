@@ -1,0 +1,57 @@
+<div>
+  <div>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span class="toolbar-spacer"></span>
+        <button (click)="back()" color="primary" mat-button style="color: white">
+          <mat-icon>arrow_back_ios</mat-icon>
+          {{ 'main.button_back' | translate }}
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div class="app-form">
+    <form (ngSubmit)="save(objForm.value)" [formGroup]="objForm!">
+      <mat-form-field>
+        <mat-label>{{ 'claim.status' | translate }}</mat-label>
+        <mat-select formControlName="status" required>
+          @for (status of statuses; track status) {
+            <mat-option [value]="status">{{ ('claim.status_' + status) | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'claim.createdAt' | translate }}</mat-label>
+        <input [matDatepicker]="pickerCreatedAt" formControlName="createdAt" matInput required>
+        <mat-datepicker-toggle [for]="pickerCreatedAt" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #pickerCreatedAt></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'claim.report' | translate }}</mat-label>
+        <mat-select formControlName="reportId" required>
+          @for (report of reports; track report) {
+            <mat-option [value]="report.id">{{report.location}} ({{ ('report.type_' + report.type) | translate }})</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'claim.user' | translate }}</mat-label>
+        <mat-select formControlName="userId" required>
+          @for (user of users; track user) {
+            <mat-option [value]="user.id">{{user.username}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'claim.message' | translate }}</mat-label>
+        <textarea #inputMessage appAutofocus cdkAutosizeMaxRows="10"
+          cdkAutosizeMinRows="4"
+        cdkTextareaAutosize formControlName="message" matInput maxlength="1000" required></textarea>
+        <mat-hint align="end">{{inputMessage.value.length || 0}}/1000</mat-hint>
+      </mat-form-field>
+      <button [disabled]="!objForm.valid" color="primary" mat-raised-button style="width: 200px">
+        {{ 'main.button_save' | translate }}
+      </button>
+    </form>
+  </div>
+</div>
