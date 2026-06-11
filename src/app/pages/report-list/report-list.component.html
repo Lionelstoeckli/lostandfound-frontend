@@ -1,0 +1,54 @@
+<div>
+  <div>
+    <mat-toolbar *appIsInRole="'user'" color="primary">
+      <span>
+        <button (click)="add()" *appIsInRole="'user'" color="primary" mat-button style="color: white">
+          <mat-icon>add</mat-icon>
+          {{'report.button_new' | translate}}
+        </button>
+      </span>
+    </mat-toolbar>
+  </div>
+  <table [dataSource]="reportDataSource" class="mat-elevation-z8 list-table" mat-table>
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef class="w-75 th-center" mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell style="text-align: end">
+        <button (click)="edit(element)" *appIsInRole="'admin'" color="primary" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="delete(element)" *appIsInRole="'admin'" color="warn" mat-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th *matHeaderCellDef mat-header-cell>{{'report.type' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{('report.type_' + element.type) | translate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th *matHeaderCellDef mat-header-cell>{{'report.status' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{('report.status_' + element.status) | translate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="location">
+      <th *matHeaderCellDef mat-header-cell>{{'report.location' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.location}} </td>
+    </ng-container>
+    <ng-container matColumnDef="reportedAt">
+      <th *matHeaderCellDef mat-header-cell>{{'report.reportedAt' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.reportedAt | date:'dd.MM.yyyy'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="item">
+      <th *matHeaderCellDef mat-header-cell>{{'report.item' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.item?.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th *matHeaderCellDef mat-header-cell>{{'report.user' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.user?.username}} </td>
+    </ng-container>
+    <tr *matHeaderRowDef="columns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10]" [pageSize]="10"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>
