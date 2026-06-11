@@ -1,0 +1,94 @@
+================================================================================
+ COMMIT-PLAN  –  Lost & Found Frontend (PowerShell, einfach Block fuer Block kopieren)
+ Repo: https://github.com/Lionelstoeckli/lostandfound-frontend
+================================================================================
+
+# ---- SETUP (einmalig) ----
+cd C:\Users\lione\Desktop\294-frontend
+git init
+git branch -M main
+git config user.name "Lionel Stoeckli"
+git config user.email "lionel.stoeckli@bbzbl-it.ch"
+git remote add origin https://github.com/Lionelstoeckli/lostandfound-frontend.git
+
+
+# ======================== TAG 1 – 10.06.2026 ========================
+
+# 10.06.2026  09:14
+$env:GIT_AUTHOR_DATE="2026-06-10T09:14:07"; $env:GIT_COMMITTER_DATE="2026-06-10T09:14:07"
+git add package.json angular.json tsconfig.json tsconfig.app.json tsconfig.spec.json vitest.config.ts .eslintrc.json .editorconfig .gitignore proxy.conf.json
+git commit -m "chore: scaffold Angular project and build configuration"
+
+# 10.06.2026  10:02
+$env:GIT_AUTHOR_DATE="2026-06-10T10:02:41"; $env:GIT_COMMITTER_DATE="2026-06-10T10:02:41"
+git add package-lock.json src/index.html src/main.ts src/styles.scss src/favicon.ico src/environments src/assets/fonts
+git commit -m "feat: add base styling, index page, fonts and environments"
+
+# 10.06.2026  11:18
+$env:GIT_AUTHOR_DATE="2026-06-10T11:18:55"; $env:GIT_COMMITTER_DATE="2026-06-10T11:18:55"
+git add src/app.roles.ts src/app/app.config.ts src/app/service/app.auth.service.ts src/app/service/header.service.ts src/app/service/mat.intl.service.ts src/app/guard src/app/interceptor
+git commit -m "feat: set up OAuth2/Keycloak authentication, guard and CSRF interceptor"
+
+# 10.06.2026  13:05
+$env:GIT_AUTHOR_DATE="2026-06-10T13:05:23"; $env:GIT_COMMITTER_DATE="2026-06-10T13:05:23"
+git add src/app/dataaccess
+git commit -m "feat: add data models for user, item, report and claim"
+
+# 10.06.2026  14:27
+$env:GIT_AUTHOR_DATE="2026-06-10T14:27:36"; $env:GIT_COMMITTER_DATE="2026-06-10T14:27:36"
+git add src/app/service/user.service.ts src/app/service/item.service.ts src/app/service/report.service.ts src/app/service/claim.service.ts
+git commit -m "feat: add CRUD REST services for all entities"
+
+# 10.06.2026  16:09
+$env:GIT_AUTHOR_DATE="2026-06-10T16:09:48"; $env:GIT_COMMITTER_DATE="2026-06-10T16:09:48"
+git add src/app/components src/app/dir
+git commit -m "feat: add shared components (header, login, confirm dialog) and directives"
+
+# 10.06.2026  17:33
+$env:GIT_AUTHOR_DATE="2026-06-10T17:33:12"; $env:GIT_COMMITTER_DATE="2026-06-10T17:33:12"
+git add src/app/pages/user-list src/app/pages/user-detail
+git commit -m "feat: add user list and detail pages"
+
+
+# ======================== TAG 2 – 11.06.2026 ========================
+
+# 11.06.2026  09:21
+$env:GIT_AUTHOR_DATE="2026-06-11T09:21:30"; $env:GIT_COMMITTER_DATE="2026-06-11T09:21:30"
+git add src/app/pages/item-list/item-list.component.ts src/app/pages/item-list/item-list.component.html src/app/pages/item-list/item-list.component.scss src/app/pages/item-detail
+git commit -m "feat: add item list and detail pages"
+
+# 11.06.2026  10:38
+$env:GIT_AUTHOR_DATE="2026-06-11T10:38:54"; $env:GIT_COMMITTER_DATE="2026-06-11T10:38:54"
+git add src/app/pages/report-list src/app/pages/report-detail
+git commit -m "feat: add report pages with enum, date picker and related selects"
+
+# 11.06.2026  11:52
+$env:GIT_AUTHOR_DATE="2026-06-11T11:52:09"; $env:GIT_COMMITTER_DATE="2026-06-11T11:52:09"
+git add src/app/pages/claim-list src/app/pages/claim-detail
+git commit -m "feat: add claim list and detail pages"
+
+# 11.06.2026  14:11
+$env:GIT_AUTHOR_DATE="2026-06-11T14:11:42"; $env:GIT_COMMITTER_DATE="2026-06-11T14:11:42"
+git add src/app/pages/dashboard src/app/pages/no-access src/app/app.routes.ts src/app/app.component.ts src/app/app.component.html src/app/app.component.scss
+git commit -m "feat: add dashboard, no-access page, routing and app shell"
+
+# 11.06.2026  15:26
+$env:GIT_AUTHOR_DATE="2026-06-11T15:26:18"; $env:GIT_COMMITTER_DATE="2026-06-11T15:26:18"
+git add src/assets/i18n
+git commit -m "feat: add German translations"
+
+# 11.06.2026  16:40
+$env:GIT_AUTHOR_DATE="2026-06-11T16:40:05"; $env:GIT_COMMITTER_DATE="2026-06-11T16:40:05"
+git add src/app/service/item.service.spec.ts src/app/pages/item-list/item-list.component.spec.ts
+git commit -m "test: add unit tests for item service and item list component"
+
+# 11.06.2026  17:58
+$env:GIT_AUTHOR_DATE="2026-06-11T17:58:21"; $env:GIT_COMMITTER_DATE="2026-06-11T17:58:21"
+git add README.md COMMIT_PLAN.txt
+git commit -m "docs: add README with setup instructions"
+
+
+# ---- PUSH ZU GITHUB ----
+Remove-Item Env:\GIT_AUTHOR_DATE
+Remove-Item Env:\GIT_COMMITTER_DATE
+git push -u origin main
