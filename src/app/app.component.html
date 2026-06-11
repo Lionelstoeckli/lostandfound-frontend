@@ -1,0 +1,40 @@
+<div class="app-shell">
+  <mat-toolbar class="app-topbar">
+    <span class="app-brand">
+      <mat-icon>travel_explore</mat-icon>
+      Lost &amp; Found
+    </span>
+
+    <nav class="app-nav">
+      <a [routerLink]="['dashboard']" mat-button routerLinkActive="active-link">
+        <mat-icon>dashboard</mat-icon>&nbsp;{{ 'nav.dashboard' | translate }}
+      </a>
+      <a [routerLink]="['items']" mat-button routerLinkActive="active-link">
+        <mat-icon>category</mat-icon>&nbsp;{{ 'nav.items' | translate }}
+      </a>
+      <a [routerLink]="['reports']" mat-button routerLinkActive="active-link">
+        <mat-icon>report</mat-icon>&nbsp;{{ 'nav.reports' | translate }}
+      </a>
+      <a [routerLink]="['claims']" mat-button routerLinkActive="active-link">
+        <mat-icon>assignment_turned_in</mat-icon>&nbsp;{{ 'nav.claims' | translate }}
+      </a>
+      <a *appIsInRole="'admin'" [routerLink]="['users']" mat-button routerLinkActive="active-link">
+        <mat-icon>people</mat-icon>&nbsp;{{ 'nav.users' | translate }}
+      </a>
+    </nav>
+
+    <span class="spacer"></span>
+
+    @if (useralias() !== '') {
+      <button (click)="logout()" class="logout-btn" mat-stroked-button>
+        <mat-icon>logout</mat-icon>
+        {{ 'nav.logout' | translate }}
+      </button>
+    }
+  </mat-toolbar>
+
+  <main class="app-content">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </main>
+</div>
