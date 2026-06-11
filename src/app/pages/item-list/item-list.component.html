@@ -1,0 +1,42 @@
+<div>
+  <div>
+    <mat-toolbar *appIsInRole="'user'" color="primary">
+      <span>
+        <button (click)="add()" *appIsInRole="'user'" color="primary" mat-button style="color: white">
+          <mat-icon>add</mat-icon>
+          {{'item.button_new' | translate}}
+        </button>
+      </span>
+    </mat-toolbar>
+  </div>
+  <table [dataSource]="itemDataSource" class="mat-elevation-z8 list-table" mat-table>
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef class="w-75 th-center" mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell style="text-align: end">
+        <button (click)="edit(element)" *appIsInRole="'admin'" color="primary" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="delete(element)" *appIsInRole="'admin'" color="warn" mat-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell>{{'item.name' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell>{{'item.description' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="color">
+      <th *matHeaderCellDef mat-header-cell>{{'item.color' | translate}}</th>
+      <td *matCellDef="let element" mat-cell> {{element.color}} </td>
+    </ng-container>
+    <tr *matHeaderRowDef="columns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10]" [pageSize]="10"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>
