@@ -1,0 +1,87 @@
+{
+  "main": {
+    "lang": "Sprache",
+    "button_save": "Speichern",
+    "button_back": "Zurück",
+    "button_yes": "Ja",
+    "button_no": "Nein",
+    "login": "Bitte melden Sie sich an um die Applikation zu verwenden!"
+  },
+  "dialogs": {
+    "message_delete": "Soll dieser Eintrag wirklich gelöscht werden?",
+    "title_delete": "Sind Sie sicher?"
+  },
+  "messages": {
+    "save_ok": "Eintrag gespeichert!",
+    "deleted_ok": "Eintrag gelöscht!",
+    "delete_error": "Eintrag konnte nicht gelöscht werden. Server Fehler!",
+    "save_error": "Eintrag konnte nicht gespeichert werden. Server Fehler!",
+    "save_new_ok": "Neuer Eintrag gespeichert!",
+    "save_new_error": "Neuer Eintrag konnte nicht gespeichert werden. Server Fehler!",
+    "close": "Schliessen"
+  },
+  "item": {
+    "name": "Name",
+    "description": "Beschreibung",
+    "color": "Farbe",
+    "button_new": "Neuen Gegenstand erfassen"
+  },
+  "report": {
+    "type": "Typ",
+    "status": "Status",
+    "location": "Ort",
+    "reportedAt": "Gemeldet am",
+    "item": "Gegenstand",
+    "user": "Benutzer",
+    "button_new": "Neue Meldung erfassen",
+    "type_LOST": "Verloren",
+    "type_FOUND": "Gefunden",
+    "status_OPEN": "Offen",
+    "status_CLOSED": "Geschlossen"
+  },
+  "claim": {
+    "message": "Nachricht",
+    "status": "Status",
+    "createdAt": "Erstellt am",
+    "report": "Meldung",
+    "user": "Benutzer",
+    "button_new": "Neuen Anspruch erfassen",
+    "status_PENDING": "Ausstehend",
+    "status_APPROVED": "Genehmigt",
+    "status_REJECTED": "Abgelehnt"
+  },
+  "user": {
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "keycloakSub": "Keycloak ID",
+    "button_new": "Neuen Benutzer erfassen"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "items": "Gegenstände",
+    "item_edit": "Gegenstand editieren",
+    "item_new": "Neuen Gegenstand erfassen",
+    "reports": "Meldungen",
+    "report_edit": "Meldung editieren",
+    "report_new": "Neue Meldung erfassen",
+    "claims": "Ansprüche",
+    "claim_edit": "Anspruch editieren",
+    "claim_new": "Neuen Anspruch erfassen",
+    "users": "Benutzer",
+    "user_edit": "Benutzer editieren",
+    "user_new": "Neuen Benutzer erfassen",
+    "noaccess": "Kein Zugriff",
+    "login": "Anmelden",
+    "logout": "Abmelden"
+  },
+  "dashboard": {
+    "welcome": "Willkommen {{username}} ({{useralias}})!"
+  },
+  "mat": {
+    "Items per page:": "Anzahl Einträge pro Seite:",
+    "Next page": "Nächste Seite",
+    "Previous page": "Vorherige Seite",
+    "First page": "Erste Seite",
+    "Last page": "Letzte Seite"
+  }
+}
