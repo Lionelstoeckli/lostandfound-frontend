@@ -3,13 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { ItemService } from './item.service';
 import { provideHttpClient } from '@angular/common/http';
 import { Item } from '../dataaccess/item';
-import { expect } from 'vitest';
 import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
 
+// Wichtigster Service der Applikation – es werden ALLE Methoden getestet:
+// getList, getOne, save, update, delete.
 describe('ItemService', () => {
   let service: ItemService;
   let httpMock: HttpTestingController;
@@ -42,11 +43,9 @@ describe('ItemService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a list of items', async () => {
-    service.getList().subscribe({
-      next: (data) => {
-        expect(data).toHaveLength(fakeItems.length);
-      },
+  it('getList() should return a list of items', () => {
+    service.getList().subscribe((data) => {
+      expect(data).toHaveLength(fakeItems.length);
     });
 
     const req = httpMock.expectOne(environment.backendBaseUrl + ItemService.backendUrl);
@@ -54,7 +53,17 @@ describe('ItemService', () => {
     req.flush(fakeItems);
   });
 
-  it('should create a new item', async () => {
+  it('getOne() should return a single item', () => {
+    service.getOne(1).subscribe((item) => {
+      expect(item).toEqual(fakeItems[0]);
+    });
+
+    const req = httpMock.expectOne(environment.backendBaseUrl + `${ItemService.backendUrl}/1`);
+    expect(req.request.method).toBe('GET');
+    req.flush(fakeItems[0]);
+  });
+
+  it('save() should create a new item', () => {
     const newItem: Item = {
       id: 3,
       name: 'Brille',
@@ -62,25 +71,22 @@ describe('ItemService', () => {
       color: 'braun',
     };
 
-    service.save(newItem).subscribe({
-      next: (item) => {
-        expect(item).toEqual(newItem);
-      },
+    service.save(newItem).subscribe((item) => {
+      expect(item).toEqual(newItem);
     });
 
     const req = httpMock.expectOne(environment.backendBaseUrl + ItemService.backendUrl);
     expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(newItem);
     req.flush(newItem);
   });
 
-  it('should update an item', async () => {
+  it('update() should update an item', () => {
     const item = fakeItems[0];
     item.name = 'Updated Item';
 
-    service.update(item).subscribe({
-      next: (updated) => {
-        expect(updated.name).toEqual('Updated Item');
-      },
+    service.update(item).subscribe((updated) => {
+      expect(updated.name).toEqual('Updated Item');
     });
 
     const req = httpMock.expectOne(
@@ -90,15 +96,17 @@ describe('ItemService', () => {
     req.flush(item);
   });
 
-  it('should delete an existing item', async () => {
-    service.delete(fakeItems[0].id).subscribe({
-      next: (response) => {
-        expect(response.status).toBe(200);
-      },
+  it('delete() should delete an existing item', () => {
+    service.delete(fakeItems[0].id).subscribe((response) => {
+      expect(response.status).toBe(200);
     });
 
     const req = httpMock.expectOne(environment.backendBaseUrl + `${ItemService.backendUrl}/${fakeItems[0].id}`);
     expect(req.request.method).toBe('DELETE');
     req.flush(fakeItems[0].id);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 });
